@@ -7,7 +7,7 @@ import random
 #creeates a new board and populates it with mines
 #true for master board, false for player board
 def blankBoard(length):
-    boardNew = [[3 for i in range(length)] for j in range(length)]
+    boardNew = [[9 for i in range(length)] for j in range(length)]
     return boardNew
 
 def newBoard(length,mines):
@@ -63,14 +63,14 @@ def savedBoard(choice):
         #populates the created board
         for row in range(length):
             for colm in range(length):
-                UserBoard[row][colm] = savedgame.readline() 
+                UserBoard[row][colm] = int(savedgame.readline()) 
 
         #creates a board with the length stored
         MasterBoard = blankBoard(length)
         #populates the created board
         for row in range(length):
             for colm in range(length):
-                MasterBoard[row][colm] = savedgame.readline() 
+                MasterBoard[row][colm] = int(savedgame.readline())
     if choice == 0:
         return UserBoard
     elif choice == 1:
@@ -82,44 +82,51 @@ def guess(row,colm,UserBoard,MasterBoard, length):
     UserBoard[row][colm] = MasterBoard[row][colm]
     for row in range(length):
         for colm in range(length):
-            if MasterBoard[row][colm] != 0:
-                continue
-    #checks cardional directions
-            if row > 0 and MasterBoard[row - 1][colm] != -1:
-                UserBoard[row - 1][colm] = MasterBoard[row - 1][colm]
+            if MasterBoard[row][colm] == 0:
+        #checks cardional directions
+                if row > 0 and MasterBoard[row - 1][colm] != -1:
+                    UserBoard[row - 1][colm] = MasterBoard[row - 1][colm]
               
-            if row < length - 1 and MasterBoard[row + 1][colm] != -1:
-                UserBoard[row + 1][colm] = MasterBoard[row][colm]
+                if row < length - 1 and MasterBoard[row + 1][colm] != -1:
+                    UserBoard[row + 1][colm] = MasterBoard[row][colm]
             
-            if colm > 0 and MasterBoard[row][colm - 1] != -1:
-                UserBoard[row][colm - 1] = MasterBoard[row][colm - 1]
+                if colm > 0 and MasterBoard[row][colm - 1] != -1:
+                    UserBoard[row][colm - 1] = MasterBoard[row][colm - 1]
             
-            if colm < length - 1 and MasterBoard[row][colm + 1] != -1:
-                UserBoard[row][colm + 1] = MasterBoard[row][colm + 1]
-    #checks diagonals
-            if row > 0 and colm > 0 and MasterBoard[row - 1][colm - 1] != -1:
-                UserBoard[row - 1][colm - 1] = MasterBoard[row - 1][colm - 1]
+                if colm < length - 1 and MasterBoard[row][colm + 1] != -1:
+                    UserBoard[row][colm + 1] = MasterBoard[row][colm + 1]
+        #checks diagonals
+                if row > 0 and colm > 0 and MasterBoard[row - 1][colm - 1] != -1:
+                    UserBoard[row - 1][colm - 1] = MasterBoard[row - 1][colm - 1]
             
-            if row > 0 and colm < length - 1 and MasterBoard[row - 1][colm + 1] != -1:
-                UserBoard[row - 1][colm + 1] = MasterBoard[row - 1][colm + 1]
+                if row > 0 and colm < length - 1 and MasterBoard[row - 1][colm + 1] != -1:
+                    UserBoard[row - 1][colm + 1] = MasterBoard[row - 1][colm + 1]
               
-            if row < length - 1 and colm > 0 and MasterBoard[row + 1][colm - 1] != -1:
-                UserBoard[row + 1][colm - 1] = MasterBoard[row + 1][colm - 1]
+                if row < length - 1 and colm > 0 and MasterBoard[row + 1][colm - 1] != -1:
+                    UserBoard[row + 1][colm - 1] = MasterBoard[row + 1][colm - 1]
             
-            if row < length - 1 and colm < - 1 and MasterBoard[row + 1][colm + 1] != -1:
-                UserBoard[row + 1][colm + 1] = MasterBoard[row + 1][colm + 1]
+                if row < length - 1 and colm < - 1 and MasterBoard[row + 1][colm + 1] != -1:
+                    UserBoard[row + 1][colm + 1] = MasterBoard[row + 1][colm + 1]
             
-            tmp = UserBoard[row][colm]
-            if tmp == -1:
-                print("Loser!")
-                return UserBoard,True
-            elif tmp == 3:
-                return UserBoard,False
-            elif tmp != -1:
-                print("Winner")
-                quit(0)
-            
-    return UserBoard,False
+                if UserBoard[row][colm] == -1:
+                    print("You Lost!")
+                    return UserBoard, True
+                else:
+                    counter = 0
+                    for i in range(length):
+                        for j in range(length):
+                            if UserBoard[i][j] == 9:
+                                counter += 1
+                    if counter == 0:
+                        print("Winner!")
+                        quit(0)
+    return UserBoard, False
+
+
+
+
+
+
 
 
 def flag(row,colm,UserBoard):
