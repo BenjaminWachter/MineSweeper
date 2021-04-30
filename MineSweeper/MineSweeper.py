@@ -13,17 +13,19 @@ def printBoard(board):
         print(i + 1, '', sep= ' ', end = '')
     print() 
     for i in range(length):
-        if i < 10:
+        if i < 9:
             print(i + 1, '|', sep = '  ', end='')
         else:
             print(i + 1, '|', sep = ' ', end='')
         for j in range(length):
             if board[i][j] == -1:
                 print('X', end = '|')
-            elif board[i][j] == 3:
+            elif board[i][j] == 9:
                 print('-', end = '|')
             else:
                 print(str(board[i][j]).rstrip('\n'), end = '|')
+            
+
         print()
 
 """
@@ -39,8 +41,8 @@ while True:
     choice = str(input("New game\nContinue\n :")).upper()
     if choice == 'N':
         length = abs(int(input("Enter number for board: ")))
-        if length > 20:
-            length = 20
+        if length > 10:
+            length = 10
         mines = abs(int(input("Enter number of mines: ")))
         if mines > length * length:
             mines = int(length * length / 2)
