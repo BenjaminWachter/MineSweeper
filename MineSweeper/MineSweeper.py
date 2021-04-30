@@ -54,40 +54,49 @@ while True:
         break
 
 
-
-
-
-
-
-
 """
 while have not landed on a mine or all non mines are shown 
     prints out the blank board 
     asks if want to save or promots the user for a (x,y) cordanant and if wants to flag a space (x,y,f)
     takes the guess and checks if it is empty, a number, or a mine
 """
-
+flag = False
 while True:
     printBoard(UserBoard)
     choice = str(input("Guess a space\nFlag a space\nSave\nQuit\n :")).upper()
    
     if choice == 'G':
         row = 21
-        while row > length:
-            row = abs(int(input("Enter a Row: ")))
+        while row > length or type(row) != int or row == 0:
+            try:
+                row = abs(int(input("Enter a Row: ")))
+            except:
+                print("Try Again!")
+
         colm = 21
-        while colm > length:
-            colm = abs(int(input("Enter a Column: ")))
+        while colm > length or type(colm) != int or row == 0:
+            try:
+                colm = abs(int(input("Enter a Column: ")))
+            except:
+                print("Try Again")
  
         UserBoard,flag = function.guess(row - 1,colm - 1,UserBoard,MasterBoard, length)
 
     elif choice == 'F':
         row = 21
-        while row > length or row == 0:
-            row = abs(int(input("Enter a Row: ")))
+        while row > length or type(row) != int or row == 0:
+            try:
+                row = abs(int(input("Enter a Row: ")))
+            except:
+                print("Try Again!")
+                
         colm = 21
-        while colm > length or colm == 0:
-            colm = abs(int(input("Enter a Column: ")))
+        while colm > length or type(colm) != int or row == 0:
+            try:
+                colm = abs(int(input("Enter a Column: ")))
+            except:
+                print("Try Again")
+
         UserBoard = function.flag(row - 1,colm - 1,UserBoard)
 
     elif choice == 'S':
