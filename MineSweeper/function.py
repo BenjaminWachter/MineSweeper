@@ -108,29 +108,27 @@ def guess(row,colm,UserBoard,MasterBoard, length):
                 if row < length - 1 and colm < - 1 and MasterBoard[row + 1][colm + 1] != -1:
                     UserBoard[row + 1][colm + 1] = MasterBoard[row + 1][colm + 1]
             
-                if UserBoard[row][colm] == -1:
-                    print("You Lost!")
-                    return UserBoard, True
-                else:
-                    counter = 0
-                    for i in range(length):
-                        for j in range(length):
-                            if UserBoard[i][j] == 9:
-                                counter += 1
-                    if counter == 0:
-                        print("Winner!")
-                        quit(0)
-    return UserBoard, False
-
-
-
-
-
+            if UserBoard[row][colm] == -1:
+                print("You Lost!")
+                return UserBoard,True
+            else:
+                counter = 0
+                for i in range(length):
+                    for j in range(length):
+                        if UserBoard[i][j] == 9 or UserBoard == 11:
+                            counter += 1
+                if counter == 0:
+                    print("Winner!")
+                    quit(0)
+    return UserBoard,False
 
 
 
 def flag(row,colm,UserBoard):
-    UserBoard[row][colm] = 'F'
+    if UserBoard[row][colm] == 11:
+        UserBoard[row][colm] = 9
+    else:
+        UserBoard[row][colm] = 11
     return UserBoard
 
 def save(UserBoard,MasterBoard, length):

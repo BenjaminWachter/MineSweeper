@@ -22,6 +22,8 @@ def printBoard(board):
                 print('X', end = '|')
             elif board[i][j] == 9:
                 print('-', end = '|')
+            elif board[i][j] == 11:
+                print('F', end = '|')
             else:
                 print(str(board[i][j]).rstrip('\n'), end = '|')
             
